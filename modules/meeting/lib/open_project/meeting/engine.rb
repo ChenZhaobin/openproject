@@ -90,6 +90,32 @@ module OpenProject::Meeting
       require_dependency 'meeting_participant'
 
       PermittedParams.permit(:search, :meetings)
+
+      require 'open_project/meeting/patches/root_patch'
+    end
+
+    add_api_path :meeting_content do |id|
+      "#{root}/meeting_contents/#{id}"
+    end
+
+    add_api_path :meeting_agenda do |id|
+      meeting_content(id)
+    end
+
+    add_api_path :meeting_minutes do |id|
+      meeting_content(id)
+    end
+
+    add_api_path :attachments_by_meeting_content do |id|
+      "#{meeting_content(id)}/attachments"
+    end
+
+    add_api_path :attachments_by_meeting_agenda do |id|
+      attachments_by_meeting_content id
+    end
+
+    add_api_path :attachments_by_meeting_minutes do |id|
+      attachments_by_meeting_content id
     end
   end
 end
