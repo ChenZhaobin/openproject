@@ -69,14 +69,17 @@ export class FormattableEditFieldComponent extends EditFieldComponent implements
   // Values used in template
   public isPreview:boolean = false;
   public previewHtml:string = '';
-  public text = {
-    attachmentLabel: this.I18n.t('js.label_formattable_attachment_hint'),
-    save: this.I18n.t('js.inplace.button_save', {attribute: this.schema.name}),
-    cancel: this.I18n.t('js.inplace.button_cancel', {attribute: this.schema.name})
-  };
+  public text:any = {};
 
   ngOnInit() {
+    super.ngOnInit();
+
     this.handler.registerOnSubmit(() => this.getCurrentValue());
+    this.text = {
+      attachmentLabel: this.I18n.t('js.label_formattable_attachment_hint'),
+      save: this.I18n.t('js.inplace.button_save', {attribute: this.schema.name}),
+      cancel: this.I18n.t('js.inplace.button_cancel', {attribute: this.schema.name})
+    };
   }
 
   public onCkeditorSetup(editor:ICKEditorInstance) {
